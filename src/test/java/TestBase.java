@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helper.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -13,6 +14,8 @@ public class TestBase {
 
     @BeforeAll
     static void setUp() {
+        Selenide.open("http://demowebshop.tricentis.com/");
+
         String browser = System.getProperty("browser", "chrome");
         String version = System.getProperty("version", "91");
         String size = System.getProperty("size", "1920x1080");
