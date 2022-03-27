@@ -1,3 +1,5 @@
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
 
@@ -11,6 +13,11 @@ import static org.hamcrest.Matchers.is;
 
 
 public class ShopTests {
+
+    @BeforeAll
+    static void beforeAll () {
+        Selenide.open("http://demowebshop.tricentis.com");
+    }
 
     @Test
     void addItemIntoCardTest() {
