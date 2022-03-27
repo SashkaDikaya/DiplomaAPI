@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,21 @@ public class ShopTests {
     @BeforeAll
     static void beforeAll () {
         Selenide.open("http://demowebshop.tricentis.com");
+        String browser = System.getProperty("browser", "chrome");
+        String version = System.getProperty("version", "91");
+        //String size = System.getProperty("size", "1920x1080");
+        String remoteUrl = System.getProperty("remoteUrl", "selenoid.autotests.cloud/wd/hub");
+        String login = System.getProperty("login", "user1");
+        String pass = System.getProperty("pass", "1234");
+
+        //Configuration.baseUrl = "https://demoqa.com";
+
+        String url = "https://" + login + ":" + pass + "@" + remoteUrl;
+        Configuration.remote = url;
+        Configuration.browser = browser;
+        Configuration.browserVersion = version;
+        //Configuration.browserSize = size;
+
     }
 
     @Test
