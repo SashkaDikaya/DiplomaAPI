@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
 
-public class ShopTests extends TestBase{
+public class ShopTests {
 
     @Test
     void addItemIntoCardTest() {
