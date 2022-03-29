@@ -1,11 +1,15 @@
 plugins {
-    id 'java-library'
+    id 'java'
     id "io.qameta.allure" version "2.9.6"
+    id "io.freefair.lombok" version "6.0.0-m2"
 }
 
 repositories {
     mavenCentral()
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 def restAssured = "4.4.0",
     selenideVersion = '6.2.1',
@@ -34,7 +38,11 @@ dependencies {
             "io.rest-assured:json-schema-validator:$restAssured",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "org.assertj:assertj-core:3.22.0",
+            "com.fasterxml.jackson.core:jackson-databind:2.11.2",
+            "org.aeonbits.owner:owner:1.0.12",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
+            "org.junit.jupiter:junit-jupiter-engine:$junitVersion",
+            "org.junit.jupiter:junit-jupiter-params:$junitVersion",
             "com.googlecode.json-simple:json-simple:1.1.1",
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion")

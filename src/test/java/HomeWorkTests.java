@@ -1,12 +1,14 @@
-package tests;
-
+import models.LombokUserData;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static helper.CustomAllureListener.withCustomTemplates;
+import static helpers.CustomAllureListener.withCustomTemplates;
+import static helpers.Spec.request;
+import static helpers.Spec.responseSpec;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -24,7 +26,39 @@ public class HomeWorkTests {
     }
 
 
+
     @Test
+    @DisplayName("")
+    void listUsersTest1() {
+
+        LombokUserData data = given()
+                .spec(request)
+                .when()
+                .get("/users?page=2")
+                .then()
+                .spec(responseSpec)
+                .log().status()
+                .log().body()
+                .extract().as(LombokUserData.class);
+
+
+
+        assertThat(data.getUser().getLastName().contains("Lawson"));
+
+
+/*
+
+.body("data.last_name", hasItems("Lawson", "Ferguson"))
+                .body("data.first_name", hasItems("Byron", "George", "Rachel"))
+                .body("data.avatar", hasItem("https://reqres.in/img/faces/11-image.jpg"))
+                .body("$", hasKey("page"))
+                .body("data", everyItem(hasKey("email")));*/
+    }
+
+
+
+    @Test
+    @DisplayName("")
     void listUsersTest() {
 
         given()
