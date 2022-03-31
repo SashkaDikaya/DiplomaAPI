@@ -1,10 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 
-@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
@@ -42,7 +39,7 @@ public class User {
         return password;
     }
 
-    public void setPassword(String token) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -53,4 +50,6 @@ public class User {
     public void setToken(String token) {
         this.token = token;
     }
+
+
 }

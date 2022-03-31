@@ -19,6 +19,5 @@ public class Spec {
     public static ResponseSpecification responseSpec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .build();
-            //.log().status()
-            //.log().body();
+
 }
