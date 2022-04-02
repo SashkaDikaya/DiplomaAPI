@@ -1,6 +1,4 @@
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import models.User;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,12 +22,7 @@ public class TestBase {
         Configuration.browserVersion = version;
         Configuration.browserSize = size;
 
-        /*DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-        Configuration.browserCapabilities = capabilities;*/
-
-        SelenideLogger.addListener("allure", new AllureSelenide());
+       //SelenideLogger.addListener("allure", new AllureSelenide());
 
     }
 
