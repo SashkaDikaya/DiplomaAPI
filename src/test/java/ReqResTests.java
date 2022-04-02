@@ -1,57 +1,43 @@
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeAll;
+import models.LombokUserData;
+import models.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static helpers.CustomAllureListener.withCustomTemplates;
-import static helpers.Spec.request;
-import static helpers.Spec.responseSpec;
+import static helpers.Spec.*;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class ReqResTests extends TestBase{
+public class ReqResTests extends TestBase {
 
-    //разобраться как передать в спеку в ответ логи
-    //как передать параметры в ответ
-    @BeforeAll
-    static void setup() {
-        RestAssured.filters(withCustomTemplates());
+    @Test
+    @DisplayName("Вывести информацию по пользователю id 7")
+    void oneUserTest() {
+
+        LombokUserData response = given()
+                .spec(request)
+                .when()
+                .get("/users/7")
+                .then()
+                .spec(responseSpec200)
+                .extract().as(LombokUserData.class);
+
+        assertEquals("Michael", response.getUser().getFirstName());
+        assertEquals("Lawson", response.getUser().getLastName());
+        assertEquals("https://reqres.in/img/faces/7-image.jpg", response.getUser().getAvatar());
     }
 
     @Test
     @DisplayName("Вывести список пользователей")
-    void listUsersTest() {
-
-        given()
-                .spec(request)
-                .when()
-                .get("/users?page=2")
-                .then()
-                .log().status()
-                .log().body()
-                .spec(responseSpec)
-                .body("data.last_name", hasItems("Lawson", "Ferguson"))
-                .body("data.first_name", hasItems("Byron", "George", "Rachel"))
-                .body("data.avatar", hasItem("https://reqres.in/img/faces/11-image.jpg"))
-                .body("$", hasKey("page"))
-                .body("data", everyItem(hasKey("email")));
-    }
-
-    @Test
-    @DisplayName("Вывести список пользователей (AssertJ)")
-    void listUsersTestWithAssertJAndModels() {
+    void listUsersTest1() {
 
         Response response = given()
                 .spec(request)
                 .get("/users?page=2")
                 .then()
-                .log().status()
-                .log().body()
-                .spec(responseSpec)
+                .spec(responseSpec200)
                 .extract().response();
 
         int total = response.path("total");
@@ -62,109 +48,104 @@ public class ReqResTests extends TestBase{
     }
 
     @Test
-    @DisplayName("Вывести список ресурсов (AssertJ)")
-    void listResourseTestWithAssertJ() {
+    @DisplayName("Вывести список ресурсов")
+    void listResourseTest() {
         Response response = given()
                 .spec(request)
                 .get("/unknown")
                 .then()
-                .log().status()
-                .log().body()
-                .spec(responseSpec)
+                .spec(responseSpec200)
                 .extract().response();
 
         assertThat(response).isNotNull();
     }
 
     @Test
-    @DisplayName("Создать пользователя")
+    @DisplayName("Создание пользователя")
     void createUserTest() {
 
-        user.setName("morpheus");
+        user.setFirstName("morpheus");
         user.setJob("zion resident");
 
-        given()
+        User response = given()
                 .spec(request)
                 .body(user)
                 .when()
                 .post("/users")
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(201)
-                .body("name", is(user.getName()))
-                .body("job", is(user.getJob()));
+                .spec(responseSpec201)
+                .extract().as(User.class);
+
+        assertEquals(user.getFirstName(), response.getFirstName());
+        assertEquals(user.getJob(), response.getJob());
     }
 
     @Test
-    @DisplayName("Зарегистрировать пользователя")
+    @DisplayName("Регистрация пользователя")
     void registerUserTest() {
 
         user.setEmail("eve.holt@reqres.in");
         user.setPassword("pistol");
 
-        given()
+        User response = given()
                 .spec(request)
                 .body(user)
                 .when()
                 .post("/register")
                 .then()
-                .log().status()
-                .log().body()
-                .spec(responseSpec)
-                .body("token", is("QpwL5tke4Pnpja7X4"));
+                .spec(responseSpec200)
+                .extract().as(User.class);
+
+        assertEquals(response.getToken(), "QpwL5tke4Pnpja7X4");
     }
 
     @Test
-    @DisplayName("Обновить пользователя")
+    @DisplayName("Обновление информации пользователя")
     void updateUserTest() {
 
-        user.setName("morpheus");
+        user.setFirstName("morpheus");
         user.setJob("zion resident");
 
-        given()
+        User response = given()
                 .spec(request)
                 .body(user)
                 .when()
                 .post("/users/2")
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(201)
-                .body("job", is(user.getJob()));
+                .spec(responseSpec201)
+                .extract().as(User.class);
+
+        assertEquals(response.getJob(), user.getJob());
     }
 
     @Test
-    @DisplayName("Пользователь не найден")
+    @DisplayName("Поиск несуществующего пользователя")
     void userNotFoundTest() {
 
         given()
                 .spec(request)
                 .get("/unknown/23")
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(404);
-
+                .spec(responseSpec404);
     }
 
     @Test
-    @DisplayName("Авторизация")
+    @DisplayName("Успешная авторизация пользователя")
     void successfulLogin() {
 
         user.setEmail("eve.holt@reqres.in");
         user.setPassword("cityslicka");
 
-        given()
+        User response = given()
                 .spec(request)
                 .body(user)
                 .when()
                 .post("/login")
                 .then()
-                .spec(responseSpec)
-                .log().status()
-                .log().body()
-                .body("token", is(notNullValue()));
+                .spec(responseSpec200)
+                .extract().as(User.class);
+
+        assertEquals(response.getToken(), "QpwL5tke4Pnpja7X4");
     }
 
 }
