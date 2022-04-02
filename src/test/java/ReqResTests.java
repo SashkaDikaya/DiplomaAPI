@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ReqResTests extends TestBase {
 
     @Test
-    @DisplayName("Вывести информацию по пользователю id 7")
+    @DisplayName("Поиск информации по id пользователя")
     void oneUserTest() {
 
         LombokUserData response = given()
