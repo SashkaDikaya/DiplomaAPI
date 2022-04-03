@@ -50,22 +50,22 @@ gradle clean test
 
 ## <img src="images/logo/Allure.svg" width="25" height="25"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://jenkins.autotests.cloud/job/10_DikayaAV_diploma/allure/">Allure report</a>
 
-### :lady_beetle: Основное окно
+### :lady_beetle: Дашборд
 
 <p align="center">
-<img title="Allure Overview Dashboard" src="images/screens/Allure_Report3.png">
+<img title="Allure Overview Dashboard" src="images/screens/Allure.png">
 </p>
 
 ### :cherries: Тесты
 
 <p align="center">
-<img title="Allure Tests" src="images/screens/Allure_Report4.png">
+<img title="Allure Tests" src="images/screens/Allure2.png">
 </p>
 
 ### :cut_of_meat: Графики
 
 <p align="center">
-<img title="Allure Graphics" src="images/screens/Allure_Report2.png">
+<img title="Allure Graphics" src="images/screens/Allure3.png">
 </p>
 
 ## <img src="images/logo/Telegram.svg" width="25" height="25"  alt="Allure"/></a> Уведомление в Telegram при помощи бота
