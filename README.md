@@ -71,7 +71,7 @@ gradle clean test
 ## <img src="images/logo/Telegram.svg" width="25" height="25"  alt="Allure"/></a> Уведомление в Telegram при помощи бота
 
 <p align="center">
-<img title="Allure Overview Dashboard" src="images/screens/Telegram.png" >
+<img title="Allure Overview Dashboard" src="" >
 </p>
 
 
