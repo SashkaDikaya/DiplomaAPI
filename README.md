@@ -43,7 +43,7 @@
 ```
 gradle clean test
 ```
-### </a> Удаленный запуск <a target="_blank" href="https://jenkins.autotests.cloud/job/10_DikayaAV_DiplomaAPI/"> (через Jenkins) </a>. Нажать на кнопку Собрать с параметрами: 
+### </a> Удаленный запуск <a target="_blank" href="https://jenkins.autotests.cloud/job/10_DikayaAV_DiplomaAPI/"> (через Jenkins) </a>. Нажать на кнопку Собрать : 
 <p align="center">
 <a href="https://jenkins.autotests.cloud/job/10_DikayaAV_diploma/"><img src="images/screens/Jenkins.png" alt="Jenkins"/></a>
 </p>
