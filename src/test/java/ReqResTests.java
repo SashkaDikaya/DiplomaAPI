@@ -9,13 +9,11 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 public class ReqResTests extends TestBase {
 
     @Test
     @DisplayName("Поиск информации по id пользователя")
     void oneUserTest() {
-
         LombokUserData response = given()
                 .spec(request)
                 .when()
@@ -32,7 +30,6 @@ public class ReqResTests extends TestBase {
     @Test
     @DisplayName("Вывести список пользователей")
     void listUsersTest1() {
-
         Response response = given()
                 .spec(request)
                 .get("/users?page=2")
@@ -63,7 +60,7 @@ public class ReqResTests extends TestBase {
     @Test
     @DisplayName("Создание пользователя")
     void createUserTest() {
-
+        User user = new User();
         user.setFirstName("morpheus");
         user.setJob("zion resident");
 
@@ -83,7 +80,7 @@ public class ReqResTests extends TestBase {
     @Test
     @DisplayName("Регистрация пользователя")
     void registerUserTest() {
-
+        User user = new User();
         user.setEmail("eve.holt@reqres.in");
         user.setPassword("pistol");
 
@@ -102,7 +99,7 @@ public class ReqResTests extends TestBase {
     @Test
     @DisplayName("Обновление информации пользователя")
     void updateUserTest() {
-
+        User user = new User();
         user.setFirstName("morpheus");
         user.setJob("zion resident");
 
@@ -121,7 +118,6 @@ public class ReqResTests extends TestBase {
     @Test
     @DisplayName("Поиск несуществующего пользователя")
     void userNotFoundTest() {
-
         given()
                 .spec(request)
                 .get("/unknown/23")
@@ -132,7 +128,7 @@ public class ReqResTests extends TestBase {
     @Test
     @DisplayName("Успешная авторизация пользователя")
     void successfulLogin() {
-
+        User user = new User();
         user.setEmail("eve.holt@reqres.in");
         user.setPassword("cityslicka");
 
@@ -147,5 +143,4 @@ public class ReqResTests extends TestBase {
 
         assertEquals(response.getToken(), "QpwL5tke4Pnpja7X4");
     }
-
 }

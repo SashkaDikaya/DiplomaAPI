@@ -33,7 +33,6 @@ allure {
 
 dependencies {
     testImplementation(
-            'org.json:json:20211205',
             "io.rest-assured:rest-assured:$restAssured",
             "io.rest-assured:json-schema-validator:$restAssured",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
@@ -43,7 +42,6 @@ dependencies {
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion",
             "org.junit.jupiter:junit-jupiter-params:$junitVersion",
-            "com.googlecode.json-simple:json-simple:1.1.1",
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion")
     testRuntimeOnly(

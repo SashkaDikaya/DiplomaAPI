@@ -34,5 +34,4 @@ public class Spec {
             .log(LogDetail.STATUS)
             .log(LogDetail.BODY)
             .build();
-
 }
